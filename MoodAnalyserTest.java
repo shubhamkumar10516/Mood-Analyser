@@ -10,12 +10,12 @@ public class MoodAnalyserTest {
 	 
      @Before
      public void initialization() {
-    	 moodAnalyser = new MoodAnalyser("I am in sad mood");
+    	 moodAnalyser = new MoodAnalyser("I am in happy mood");
      }
      
 	 @Test
      public void whenSad_returnSad() {
-    	 Assert.assertEquals("SAD", moodAnalyser.analyseMood());
-         Assert.assertNotEquals("HAPPY", moodAnalyser.analyseMood());
+    	 Assert.assertEquals("HAPPY", moodAnalyser.analyseMood());
+         Assert.assertNotEquals("SAD", moodAnalyser.analyseMood());
      }
 }
