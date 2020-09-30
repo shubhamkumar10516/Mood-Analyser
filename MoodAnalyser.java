@@ -9,7 +9,7 @@ public class MoodAnalyser {
     public MoodAnalyser(String message) {
 		mood = message;
 	}
-	public String analyseMood(String mood) {
+	public String analyseMood() {
 		
 		if( mood.contains("sad"))
 			  return "SAD";
