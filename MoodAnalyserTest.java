@@ -3,6 +3,9 @@ package com.bridgeLab.userReg;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import com.bridgeLab.userReg.MoodAnalysisException.Exception_type;
 
 public class MoodAnalyserTest {
 
@@ -16,20 +19,43 @@ public class MoodAnalyserTest {
      @Test
      public void whenSad_returnSad() {
     	 moodAnalyser = new MoodAnalyser("I am in sad mood");
-    	 Assert.assertEquals("SAD", moodAnalyser.analyseMood());
-         Assert.assertNotEquals("HAPPY", moodAnalyser.analyseMood());
+		 String mood = null;
+		 try {
+			mood =  moodAnalyser.analyseMood();
+			Assert.assertEquals("SAD", mood );
+		 }catch(MoodAnalysisException e) {
+			 e.printStackTrace();
+		 }
      }
      
 	 @Test
      public void whenHappy_returnHappy() {
 		 moodAnalyser = new MoodAnalyser("I am in happy mood");
-    	 Assert.assertEquals("HAPPY", moodAnalyser.analyseMood());
-         Assert.assertNotEquals("SAD", moodAnalyser.analyseMood());
+		 String mood = null;
+		 try {
+			mood =  moodAnalyser.analyseMood();
+			Assert.assertEquals("HAPPY", mood );
+		 }catch(MoodAnalysisException e) {
+			 e.printStackTrace();
+		 }
+    	 
      }
 	 @Test
-     public void whenNull_returnHappy() {
+     public void whenNull_HandleIt() {
 		 moodAnalyser = new MoodAnalyser(null);
-    	 Assert.assertEquals("HAPPY", moodAnalyser.analyseMood());
-         Assert.assertNotEquals("NULL", moodAnalyser.analyseMood());
-     }
+		 try {
+			  moodAnalyser.analyseMood();
+		}catch(MoodAnalysisException e) {
+			 Assert.assertEquals(Exception_type.NULL_TYPE, e.type);
+		 }
+      }
+	 @Test
+     public void whenEmpty_HandleIt() {
+		 moodAnalyser = new MoodAnalyser("");
+		 try {
+			  moodAnalyser.analyseMood();
+		}catch(MoodAnalysisException e) {
+			 Assert.assertEquals(Exception_type.EMPTY_TYPE, e.type);
+		 }
+      }
 }
